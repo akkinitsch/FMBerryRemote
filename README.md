@@ -16,6 +16,10 @@ a responsive webinterface that can be used with every browser on desktop pc and 
 FMBerryRemote allows you to change the webradio that is transmitted via your FMBerry by choosing stations via the webinterface.
 Furthermore FMBerryRemote gives you the chance to set the volume of the FMBerry.
 
+![FMBerryRemote on desktop pc](./screenshots/FMBerryRemote_desktop.png "FMBerryRemote on desktop pc")
+
+![FMBerryRemote on mobile device](./screenshots/FMBerryRemote_mobile.png "FMBerryRemote on desktop pc")
+
 ##Requirements
 * Python 2.7
 * mplayer
