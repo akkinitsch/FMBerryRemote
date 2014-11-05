@@ -1,0 +1,73 @@
+{% extends "bootstrap/base.html" %}
+{% block title %}FMBerry Remote{% endblock %}
+
+{% block navbar %}
+<div class="navbar navbar-fixed-top">
+  <!-- ... -->
+</div>
+{% endblock %}
+
+{% block content %}
+
+  <h1>Radio Stations</h1>
+  <section class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+    <marquee height="25">Station playing: {{choosenStation}}</marquee>
+    <div id="accordion" class="panel-group" width="50%">
+        {% for genre in GENRES %}
+         <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">
+              <a data-toggle="collapse" data-parent="#accordion" href="#{{genre['id']}}">
+                {{genre['name']}}
+              </a>
+            </h4>
+          </div>
+          <div id="{{genre['id']}}" class="panel-collapse collapse">
+            <div class="panel-body">
+              <div class="btn-group-vertical">
+                {% for channel in genre['channels'] %}
+                  <a class="btn btn-default" href="{{channel[0]}}">{{channel[1]}}</a>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% endfor %}
+    </div>
+  </section>
+</div>
+
+<section>
+    <h2>Volume</h2>
+    <div class="btn-group">
+    <a class="btn btn-default" href="volume0">Mute</a>
+  </div>
+  <div class="btn-group">
+    <a class="btn btn-default" href="volume85">85%</a>
+  </div>
+  <div class="btn-group">
+    <a class="btn btn-default" href="volume90">90%</a>
+  </div>
+  <div class="btn-group">
+    <a class="btn btn-default" href="volume95">95%</a>
+  </div>
+  <div class="btn-group">
+    <a class="btn btn-default" href="volume100">100%</a>
+  </div>
+
+<h2>Control</h2>
+<div class="btn-group" title="Reboot Raspberry Pi">
+  <a class="btn btn-default" href="reboot">Reboot</a>
+</div>
+<div class="btn-group" title="Shutdown Raspberry Pi">
+  <a class="btn btn-default" href="shutdown">Shutdown</a>
+</div>
+  
+<h2>More radiostreams</h2>
+<div>
+	<a href="http://www.xatworld.com/radio-search/">xatworld.com/radio-search</a>
+</div>
+</section>
+
+{% endblock %}

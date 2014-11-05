@@ -1,0 +1,269 @@
+from flask import Flask
+from flask import render_template
+from flask import redirect
+from flask_bootstrap import Bootstrap
+
+import logging
+import operator
+import os
+
+logging.basicConfig(format='%(asctime)s %(name)-12s %(levelname)-8s: %(message)s', level=logging.DEBUG)
+
+genres = []
+
+sport = {'id':'sport', 'name':'Sport', 'channels':[('sport1fm', 'Sport1FM')]}
+genres.append(sport)
+
+seventies = {'id':'70s', 'name':'70s', 'channels':[('bigRRadio', 'Big R Radio - Classic Rock'), ('softRockRadio', 'SoftRockRadio.net')]}
+genres.append(seventies)
+
+bop = {'id':'bop', 'name':'Bop', 'channels':[('allegroJazz', 'Allegro Jazz'), ('newOrleansRadio', 'New Orleans Radio'), ('radioSkyMusic', 'RadioSky Music')]}
+genres.append(bop)
+
+classicRock = {'id':'classicRock', 'name':'Classic Rock', 'channels':[('FmClassicAlternativeRock', '181.FM - Classic Buzz -=- Classic Alternative Rock'),\
+('FourU70s', '4U 70s'),\
+('EightiesMixTape', '80sMixTape'),\
+('aBetterClassicRockStation', 'A Better Classic Rock Station'),\
+('cityFmClassicRock', 'CITY FM Classic Rock'),
+('classicDeepCuts', 'Classic Deep Cuts'),
+('cockteleraBlues', 'Cocktelera Blues'),
+('gdRadio', 'GDRADIO.NET'),
+('novaclassicrock', 'novaclassicrock.nl'),
+('planetRockBelgium', 'Planet Rock Belgium'),
+('softClassicRock', 'Soft Classic Rock')]}
+genres.append(classicRock)
+
+folkRock = {'id':'folkRock', 'name':'Folk Rock', 'channels':[('aolmRadio', 'AOLMRadio'), ('bleh', 'Bleh'), ('dylanRadio', 'DylanRadio.com')]}
+genres.append(folkRock)
+
+hessischerRundfunk = {'id':'hr', 'name':'Hessischer Rundfunk', 'channels':[('hrInfo', 'HR Info')]}
+genres.append(hessischerRundfunk)
+
+rockabilly = {'id':'rockabilly', 'name':'Rockabilly', 'channels':[('radiobilly', 'Radiobilly'), ('rockabillyRadio', 'Rockabilly Radio')]}
+genres.append(rockabilly)
+
+swing = {'id':'swing', 'name':'Swing', 'channels':[('radioSwingWorldwide', 'Radio Swing Worldwide'), ('RATPACKMUSICRADIOWorldjazzfederation', 'RAT PACK MUSIC RADIO Worldjazzfederation.com')]}
+genres.append(swing)
+
+
+genres.sort(key=operator.itemgetter('name'))
+
+station = ""
+
+def create_app():
+  app = Flask(__name__)
+  Bootstrap(app)
+  return app
+
+app = create_app()
+
+@app.route("/")
+def hello():
+    return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/sport1fm")
+def sport1fm():
+	station = "Sport1FM"
+	os.system('/usr/local/bin/chooseChanel.sh Sport1FM http://77.67.34.21/SPORT1FM_24_7.mp3')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+#70s
+@app.route("/bigRRadio")
+def bigRRadio():
+	station = "Big R Radio"
+	os.system('/usr/local/bin/chooseChanel.sh bigRRadio http://107.155.126.42:8010')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/softRockRadio")
+def softRockRadio():
+	station = "Soft Rock Radio"
+	os.system('/usr/local/bin/chooseChanel.sh softRockRadio http://173.236.21.250:8032')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+#Bop
+@app.route("/allegroJazz")
+def allegroJazz():
+	station = "Allegro Jazz"
+	os.system('/usr/local/bin/chooseChanel.sh allegroJazz http://listen.radionomy.com/Allegro-Jazz')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/newOrleansRadio")
+def newOrleansRadio():
+	station = "New Orleans Radio"
+	os.system('/usr/local/bin/chooseChanel.sh newOrleansRadio http://listen.streamonomy.com/neworleansradio')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/radioSkyMusic")
+def radioSkyMusic():
+	station = "Radio Sky Music"
+	os.system('/usr/local/bin/chooseChanel.sh radioSkyMusic http://listen.radionomy.com/RadioSky-Music')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+#ClassicRock
+@app.route("/FmClassicAlternativeRock")
+def FmClassicAlternativeRock():
+	station = "181 Fm Classic Alternative Rock"
+	os.system('/usr/local/bin/chooseChanel.sh 181FmClassicAlternativeRock http://108.61.73.117:14038')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/FourU70s")
+def FourU70s():
+	station = "4U 70s"
+	os.system('/usr/local/bin/chooseChanel.sh 4U\ 70s http://listen.radionomy.com/4U-70s')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/EightiesMixTape")
+def EightiesMixTape():
+	station = "80s Mix Tape"
+	os.system('/usr/local/bin/chooseChanel.sh 80sMixTape http://listen.radionomy.com/80sMixTape')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/aBetterClassicRockStation")
+def aBetterClassicRockStation():
+	station = "A better classicrock station"
+	os.system('/usr/local/bin/chooseChanel.sh aBetterClassicRockStation http://listen.radionomy.com/a-better-classic-rock-station')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/cityFmClassicRock")
+def cityFmClassicRock():
+	station = "City Fm Classic Rock"
+	os.system('/usr/local/bin/chooseChanel.sh cityFmClassicRock http://91.221.151.240:8043')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/classicDeepCuts")
+def classicDeepCuts():
+	station = "Classic Deep Cuts"
+	os.system('/usr/local/bin/chooseChanel.sh classicDeepCuts http://208.85.240.10:8134')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/cockteleraBlues")
+def cockteleraBlues():
+	station = "Cocktelera Blues"
+	os.system('/usr/local/bin/chooseChanel.sh cockteleraBlues http://listen.radionomy.com/Cocktelera-Blues')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/gdRadio")
+def gdRadio():
+	station = "Gd Radio"
+	os.system('/usr/local/bin/chooseChanel.sh gdRadio http://216.119.152.213:8019')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/novaclassicrock")
+def novaclassicrock():
+	station = "Nova Classicrock"
+	os.system('/usr/local/bin/chooseChanel.sh novaclassicrock http://173.236.29.52:80')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/planetRockBelgium")
+def planetRockBelgium():
+	station = "Planet Rock Belgium"
+	os.system('/usr/local/bin/chooseChanel.sh planetRockBelgium http://91.121.219.80:8330')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/softClassicRockRadio")
+def softClassicRock():
+	station = "Soft Classic Rock"
+	os.system('/usr/local/bin/chooseChanel.sh softClassicRock http://64.71.133.122:8000')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+#FolkRock
+@app.route("/aolmRadio")
+def aolmRadio():
+	station = "Aolm Radio"
+	os.system('/usr/local/bin/chooseChanel.sh aolmRadio http://listen.radionomy.com/AOLMRadio')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/bleh")
+def bleh():
+	station = "Bleh"
+	os.system('/usr/local/bin/chooseChanel.sh bleh http://listen.radionomy.com/Bleh')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/dylanRadio")
+def dylanRadio():
+	station = "Dylan Radio"
+	os.system('/usr/local/bin/chooseChanel.sh dylanRadio http://173.192.198.244:8138')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+#Hessischer Rundfunk
+@app.route("/hrInfo")
+def hrInfo():
+	station = "HR Info"
+	os.system('/usr/local/bin/chooseChanel.sh HR\ Info http://www.metafilegenerator.de/HR/hrinfo/mp3/webm.m3u')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+#Rockabilly
+@app.route("/radiobilly")
+def radiobilly():
+	station = "Radiobilly"
+	os.system('/usr/local/bin/chooseChanel.sh Radiobilly http://184.154.202.243:8150')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/rockabillyRadio")
+def rockabillyRadio():
+	station = "Rockabilly Radio"
+	os.system('/usr/local/bin/chooseChanel.sh Rockabilly\ Radio http://209.9.238.6:6042')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+#Swing
+@app.route("/radioSwingWorldwide")
+def radioSwingWorldwide():
+	station = "Radio Swing Worldwide"
+	os.system('/usr/local/bin/chooseChanel.sh Radion\ Swing\ Worldwide http://208.53.158.48:8100')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+
+@app.route("/RATPACKMUSICRADIOWorldjazzfederation")
+def RATPACKMUSICRADIOWorldjazzfederation():
+	station = "Rat Pack Music Radio Worldjazzfederation"
+	os.system('/usr/local/bin/chooseChanel.sh RAT\ PACK\ MUSIC\ RADIO\ Worldjazzfederation.com http://74.55.244.98:6900')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+#Control
+@app.route("/volume0")
+def volume0():
+	os.system('vol 0')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/volume75")
+def volume75():
+	os.system('vol 75')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/volume80")
+def volume80():
+	os.system('vol 80')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=choosenStation)
+
+@app.route("/volume85")
+def volume85():
+	os.system('vol 85')
+	return render_template('fmberryremote.html', genres=genres)
+
+@app.route("/volume90")
+def volume90():
+	os.system('vol 90')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/volume95")
+def volume95():
+	os.system('vol 95')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/volume100")
+def volume100():
+	os.system('vol 100')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/reboot")
+def reboot():
+	os.system('reboot')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+@app.route("/shutdown")
+def shutdown():
+	os.system('shutdown -h now')
+	return render_template('fmberryremote.html', genres=genres, choosenStation=station)
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port=80, debug=True)
