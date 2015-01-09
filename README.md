@@ -42,3 +42,8 @@ FMBerryRemote will be available via browser under the IP-address of the FMBerry 
 
     (sleep 2; sudo /home/pi/fmberryremote/fmberrystart)&
     (sleep 2; sudo python /home/pi/fmberryremote/server/fmberryremote.py)&
+
+#TODOs
+* Replace mplayer with mpd
+* When user changes settings (radio channel, volume, ...) save it persisantely and load last settings when server
+  is shutdown and started again.
