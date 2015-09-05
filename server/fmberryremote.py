@@ -42,6 +42,9 @@ GENRES.append(SPORT)
 SEVENTIES = {'id':'70s', 'name':'70s', 'channels':[('bigrradio', 'Big R Radio - Classic Rock'), ('softrockradio', 'SoftRockRadio.net')]}
 GENRES.append(SEVENTIES)
 
+BLUEGRASS = {'id':'BLUEGRASS', 'name':'Bluegrass', 'channels':[('bluegrassmix', 'BluegrassMix')]}
+GENRES.append(BLUEGRASS)
+
 BOP = {'id':'BOP', 'name':'Bop', 'channels':[('allegrojazz', 'Allegro Jazz'), ('neworleansradio', 'New Orleans Radio'), ('radioskymusic', 'RadioSky Music')]}
 GENRES.append(BOP)
 
@@ -105,6 +108,13 @@ def softrockradio():
     """Function for setting radiostream."""
     os.system('/usr/local/bin/chooseChanel.sh softrockradio http://173.236.21.250:8032')
     return render_template('fmberryremote.html', GENRES=GENRES, choosenStation="Soft Rock Radio")
+
+#Bluegrass
+@app.route("/bluegrassmix")
+def gluegrassmix():
+    """Function for setting radiostream."""
+    os.system('/usr/local/bin/chooseChanel.sh bluegrassmix http://192.81.248.194:8072/stream ')
+    return render_template('fmberryremote.html', GENRES=GENRES, choosenStation="BluegrassMix")
 
 #Bop
 @app.route("/allegrojazz")
@@ -250,6 +260,7 @@ def ratpackmusicradioworldjazzfederation():
 def volume0():
     """Function for setting volume."""
     os.system('vol 0')
+    logging.debug('Mute')
     return render_template('fmberryremote.html', GENRES=GENRES, choosenStation=STATION)
 
 @app.route("/volume75")
