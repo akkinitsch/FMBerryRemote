@@ -33,5 +33,5 @@ sleep 5
 sudo /etc/init.d/fmberry start
 sleep 5
 ctlfmberry set freq 88000
-mplayer -wid 67109477 -slave  -vo x11 -zoom -ao alsa -framedrop  -contrast 0 -brightness 0 -hue 0 -saturation 0  -cache 128 'http://77.67.34.21/SPORT1FM_24_7.mp3' -identify &
+mplayer -wid 67109477 -slave  -vo x11 -zoom -ao alsa -framedrop  -contrast 0 -brightness 0 -hue 0 -saturation 0  -cache 128 'http://listen.radionomy.com/Allegro-Jazz' -identify &
 vol 100
