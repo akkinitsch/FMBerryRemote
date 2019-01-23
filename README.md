@@ -1,15 +1,15 @@
-#FMBerryRemote
+# FMBerryRemote
 
-##What is this?
+## What is this?
 
-###What is FMBerry?
+### What is FMBerry?
 As written on its [project page](https://github.com/Manawyrm/FMBerry),
  "FMBerry is a piece of software that allows you to transmit FM radio with your Raspberry Pi."
 
 For further information what FMBerry is and how to build one, please refer to the [FMBerry](https://github.com/Manawyrm/FMBerry)
 project homepage.
 
-###What is FMBerryRemote?
+### What is FMBerryRemote?
 FMBerryRemote is a piece of software that allows you to control your FMBerry via a browser. FMBerryRemote provides
 a responsive webinterface that can be used with every browser on desktop pc and mobiles like tablets and mobile phones.
 
@@ -20,21 +20,21 @@ Furthermore FMBerryRemote gives you the chance to set the volume of the FMBerry.
 
 ![FMBerryRemote on mobile device](./screenshots/FMBerryRemote_mobile.png "FMBerryRemote on desktop pc")
 
-##Requirements
+## Requirements
 * Python 2.7
 * mplayer
 * Flask
 * Flask-Bootstrap
 * FMBerry software installed
 
-##Installation
+## Installation
 For installing FMBerryRemote, use the makefile contained in this repository:
 
     sudo make install
 
 This will install all requirements (if not already installed) and to copy the needed shellscripts to systempath.
 
-###Autostart FMBerry and FMBerryRemote
+### Autostart FMBerry and FMBerryRemote
 If you want FMBerry and FMBerryRemote to run at startup, add the following lines to file /etc/rclocal.
 FMBerryRemote will be available via browser under the IP-address of the FMBerry device.
 
@@ -43,7 +43,7 @@ FMBerryRemote will be available via browser under the IP-address of the FMBerry 
     (sleep 2; sudo /home/pi/fmberryremote/fmberrystart)&
     (sleep 2; sudo python /home/pi/fmberryremote/server/fmberryremote.py)&
 
-#TODOs
+# TODOs
 * Replace mplayer with mpd
 * When user changes settings (radio channel, volume, ...) save it persisantely and load last settings when server
   is shutdown and started again.
